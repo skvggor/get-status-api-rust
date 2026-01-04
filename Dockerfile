@@ -15,6 +15,6 @@ WORKDIR /app
 
 COPY --from=builder /usr/src/app/target/release/rust-api-axum .
 
-EXPOSE 3000
+EXPOSE 3003
 
 CMD ["./rust-api-axum"]

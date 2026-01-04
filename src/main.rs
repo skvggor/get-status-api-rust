@@ -89,7 +89,7 @@ async fn main() {
 
     let address: String = format!("{host}:{port}");
 
-    let default_address: SocketAddr = "0.0.0.0:3000".parse::<SocketAddr>().unwrap();
+    let default_address: SocketAddr = "0.0.0.0:3003".parse::<SocketAddr>().unwrap();
 
     let final_addr: SocketAddr = if let Ok(curr) = address.parse::<SocketAddr>() {
         curr
