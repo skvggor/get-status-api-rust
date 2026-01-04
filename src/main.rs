@@ -39,11 +39,11 @@ fn get_status(time: String, day: String) -> String {
 
     let mut status: String = "".to_string();
 
-    let sleep: bool = time >= "00:00".to_string() && time < "07:59".to_string();
-    let lunch: bool = time >= "12:00".to_string() && time < "14:00".to_string();
-    let weekend: bool = day == "Saturday".to_string() || day == "Sunday".to_string();
-    let work: bool = time >= "08:00".to_string() && time < "18:00".to_string();
-    let free: bool = time >= "18:01".to_string() && time < "23:59".to_string();
+    let sleep: bool = time.as_str() >= "00:00" && time.as_str() < "07:59";
+    let lunch: bool = time.as_str() >= "12:00" && time.as_str() < "14:00";
+    let weekend: bool = day.as_str() == "Saturday" || day.as_str() == "Sunday";
+    let work: bool = time.as_str() >= "08:00" && time.as_str() < "18:00";
+    let free: bool = time.as_str() >= "18:01" && time.as_str() < "23:59";
 
     if sleep {
         status = "sleep".to_string();
