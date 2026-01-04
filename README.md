@@ -1,4 +1,4 @@
-# Get Status API | skvggor.dev
+# Get Status API
 
 Simple REST API that returns the current status based on time of day and day of week.
 
@@ -13,15 +13,6 @@ A lightweight API built with Rust and Axum that provides information about curre
 - Health check endpoint
 - Docker support
 - Comprehensive test coverage
-
-## Technologies
-
-- **Rust 1.92.0** - Programming language
-- **Axum 0.6** - Web framework
-- **Tokio 1.49.0** - Async runtime
-- **Serde 1.0.228** - Serialization
-- **Chrono 0.4.42** - Date and time handling
-- **Docker** - Containerization
 
 ## Status Types
 
@@ -75,45 +66,6 @@ cp .env.example .env
 cargo run
 ```
 
-### Running with Docker
-
-1. Build and run with Docker Compose:
-```bash
-docker compose up --build
-```
-
-2. Or build the image manually:
-```bash
-docker build -t rust-api-axum .
-docker run -p 3333:3333 rust-api-axum
-```
-
-### Production Build
-
-Use the provided build script:
-```bash
-./build-prod.sh
-```
-
-This runs tests and builds the release binary to `bin/rust-api-axum`.
-
-## Environment Variables
-
-- `HOST`: Server host (default: 0.0.0.0)
-- `PORT`: Server port (default: 3333)
-
-## Testing
-
-Run the test suite:
-```bash
-cargo test
-```
-
-The project includes tests for:
-- Time formatting (`test_get_utc_time`)
-- Status calculation logic (`test_get_status`)
-- API response (`test_response_json`)
-
 ## License
 
-See LICENSE file.
+This project is licensed under the Apache License Version 2.0. See the [LICENSE](LICENSE) file for details.
