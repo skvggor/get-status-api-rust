@@ -1,0 +1,20 @@
+services:
+  rust-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - caddy_net
+    labels:
+      - caddy=get-status.skvggor.dev
+      - caddy.reverse_proxy={{upstreams 3003}}
+      - caddy.encode=zstd gzip
+    expose:
+      - 3003
+    env_file:
+      - .env
+
+networks:
+  caddy_net:
+    external: true

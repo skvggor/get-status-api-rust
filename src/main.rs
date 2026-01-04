@@ -39,11 +39,11 @@ fn get_status(time: String, day: String) -> String {
 
     let mut status: String = "".to_string();
 
-    let sleep: bool = time >= "00:00".to_string() && time < "07:59".to_string();
-    let lunch: bool = time >= "12:00".to_string() && time < "14:00".to_string();
-    let weekend: bool = day == "Saturday".to_string() || day == "Sunday".to_string();
-    let work: bool = time >= "08:00".to_string() && time < "18:00".to_string();
-    let free: bool = time >= "18:01".to_string() && time < "23:59".to_string();
+    let sleep: bool = time.as_str() >= "00:00" && time.as_str() < "07:59";
+    let lunch: bool = time.as_str() >= "12:00" && time.as_str() < "14:00";
+    let weekend: bool = day.as_str() == "Saturday" || day.as_str() == "Sunday";
+    let work: bool = time.as_str() >= "08:00" && time.as_str() < "18:00";
+    let free: bool = time.as_str() >= "18:01" && time.as_str() < "23:59";
 
     if sleep {
         status = "sleep".to_string();
@@ -76,7 +76,7 @@ async fn response_json() -> Json<Status> {
 
 #[tokio::main]
 async fn main() {
-    dotenv().expect("Failed to load .env file");
+    dotenv().ok();
 
     let route: String = "/rust-api/api/v1".to_string();
 
@@ -84,12 +84,12 @@ async fn main() {
         .route(&(route.clone() + "/status"), get(response_json))
         .route(&(route + "/healthcheck"), get(|| async { "ok" }));
 
-    let host: String = env::var("HOST").unwrap();
-    let port: String = env::var("PORT").unwrap();
+    let host: String = env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
+    let port: String = env::var("PORT").unwrap_or_else(|_| "3003".to_string());
 
     let address: String = format!("{host}:{port}");
 
-    let default_address: SocketAddr = "0.0.0.0:3000".parse::<SocketAddr>().unwrap();
+    let default_address: SocketAddr = "0.0.0.0:3003".parse::<SocketAddr>().unwrap();
 
     let final_addr: SocketAddr = if let Ok(curr) = address.parse::<SocketAddr>() {
         curr
