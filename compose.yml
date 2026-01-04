@@ -3,8 +3,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "${PORT:-3333}:3000"
+    restart: unless-stopped
+    networks:
+      - caddy_net
+    labels:
+      - caddy=get-status.skvggor.dev
+      - caddy.reverse_proxy={{upstreams 3000}}
+      - caddy.encode=zstd gzip
+    expose:
+      - 3000
     env_file:
       - .env
-    restart: unless-stopped
+
+networks:
+  caddy_net:
+    external: true
