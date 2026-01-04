@@ -1,10 +1,10 @@
-version: "3"
 services:
   rust-api:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${PORT}:${PORT}"
-    volumes:
-      - .:/usr/src/app
+      - "${PORT:-3333}:3000"
+    env_file:
+      - .env
+    restart: unless-stopped
