@@ -7,7 +7,7 @@ services:
     networks:
       - caddy_net
     labels:
-      - caddy=get-status.skvggor.dev
+      - caddy=your-subdomain.yourdomain.com
       - caddy.reverse_proxy={{upstreams 3003}}
       - caddy.encode=zstd gzip
     expose:

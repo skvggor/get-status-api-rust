@@ -4,3 +4,4 @@
 .vercel
 .vscode
 /bin
+compose.yml
