@@ -76,7 +76,7 @@ async fn response_json() -> Json<Status> {
 
 #[tokio::main]
 async fn main() {
-    dotenv().expect("Failed to load .env file");
+    dotenv().ok();
 
     let route: String = "/rust-api/api/v1".to_string();
 
@@ -84,8 +84,8 @@ async fn main() {
         .route(&(route.clone() + "/status"), get(response_json))
         .route(&(route + "/healthcheck"), get(|| async { "ok" }));
 
-    let host: String = env::var("HOST").unwrap();
-    let port: String = env::var("PORT").unwrap();
+    let host: String = env::var("HOST").unwrap_or_else(|_| "0.0.0.0".to_string());
+    let port: String = env::var("PORT").unwrap_or_else(|_| "3003".to_string());
 
     let address: String = format!("{host}:{port}");
 
